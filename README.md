@@ -22,13 +22,13 @@ When executed using ReSharper, the Tests are displayed, with the result of NBenc
 
 Visual Studio Test Explorer will also execute and debug the Tests, but presentation of results is less polished.
 
-Please note, the example includes a vairety of passing, and deliberately failing tests.
+Please note, the example includes a variety of passing, and deliberately failing Tests.
 
 ##Future plans
 
 Release as NuGet package.
 
-Possibly the creation of a custom TheoryAttribute, and implementation of IDataDiscoverer.
+Possibly the creation of a custom TheoryAttribute, and implementation of IDataDiscoverer, which would support 'Pre-Discovery' of Tests, following a Build.
 
 https://github.com/xunit/xunit/blob/master/src/xunit.core/TheoryAttribute.cs
 
