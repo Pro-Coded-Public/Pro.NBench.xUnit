@@ -18,6 +18,8 @@ When executed using ReSharper, the Tests are displayed, with the result of NBenc
 
 ![ResharperResults](ResharperResults.PNG)
 
+Please note, the example includes a vairety of passing, and deliberately failing tests.
+
 ##Future plans
 
 Release as NuGet package.
