@@ -10,9 +10,9 @@ http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-
 
 The Tests project contains a set of three standard NBench test classes, attrributed to collect Measurements, and Assert some conditions.
 
-The PerformanceTests.cs class contains a straightforward definition of an xUnit Test, attributed to act as a Theory, with a data source specified as a MemberData entry that uses the referenced NBenchTestHandler to discover test data from one of the aformentioned standard NBench Test Classes. 
+The example PerformanceTests.cs class contains three straightforward method, each an xUnit Test attributed to act as a Theory, with a data source specified as a MemberData entry that uses the referenced NBenchTestHandler to discover test data from one of the aformentioned standard NBench Test Classes. 
 
-The discovered NBench tests are iterated, and passed to the xUnit Test Method. The body of this method calls a standard Helper function to execute the NBench benchmarks. Breakpoints in the NBench benchmarks are fully supported for debugging.
+The discovered NBench tests are iterated, and passed to the xUnit Test Method. The body of this method calls a Helper function to execute the NBench benchmarks. Breakpoints in the NBench benchmarks are fully supported for debugging.
 
 ![PerformanceTests](PerformanceTests.PNG)
 
