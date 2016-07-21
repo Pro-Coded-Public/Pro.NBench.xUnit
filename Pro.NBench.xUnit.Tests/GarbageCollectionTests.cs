@@ -10,7 +10,7 @@ using NBench;
 namespace Pro.NBench.xUnit.Tests
 {
     public class GarbageCollectionTests
-    {
+    { 
         #region Fields
 
         private readonly List<int[]> _dataCache = new List<int[]>();

@@ -9,7 +9,7 @@ using NBench;
 namespace Pro.NBench.xUnit.Tests
 {
     public class DictionaryThroughputTests
-    {
+    { 
         #region Constants
 
         private const int AcceptableMinAddThroughput = 20000000;

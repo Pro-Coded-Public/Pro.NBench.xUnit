@@ -9,7 +9,7 @@ using NBench;
 namespace Pro.NBench.xUnit.Tests
 {
     public class DictionaryMemoryTests
-    {
+    { 
         #region Constants
 
         private const int DictionaryEntrySize = 24;

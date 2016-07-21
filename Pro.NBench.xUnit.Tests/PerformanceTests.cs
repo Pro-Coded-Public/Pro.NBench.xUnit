@@ -13,7 +13,7 @@ using Xunit.Abstractions;
 namespace Pro.NBench.xUnit.Tests
 {
     public class PerformanceTests
-    {
+    { 
         #region Constructors and Destructors
 
         public PerformanceTests(ITestOutputHelper output)
