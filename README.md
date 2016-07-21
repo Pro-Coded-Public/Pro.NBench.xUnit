@@ -36,3 +36,8 @@ c) Standard NBench Report output.
 
 d) Collation of results from multiple tests for comparison.
 
+
+--
+**All Feedback Welcome!**
+
+*David Paul McQuiggin, Pro-Coded.*
