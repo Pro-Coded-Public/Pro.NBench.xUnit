@@ -28,9 +28,10 @@ Please note, the example includes a variety of passing, and deliberately failing
 
 a) Release as NuGet package.
 
-b)Possibly the creation of a custom TheoryAttribute, and implementation of IDataDiscoverer, which would support 'Pre-Discovery' of Tests, following a Build.
+b) Possibly the creation of a custom TheoryAttribute, and implementation of IXunitTestCaseDiscoverer, which would support 'Pre-Discovery' of Tests, following a Build.
 
 https://github.com/xunit/xunit/blob/master/src/xunit.core/TheoryAttribute.cs
+https://github.com/xunit/xunit/blob/master/src/xunit.execution/Sdk/Frameworks/TheoryDiscoverer.cs
 
 c) Standard NBench Report output.
 
