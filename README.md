@@ -10,19 +10,19 @@ http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-
 
 The Tests project serves as an example, and contains a set of three standard NBench test classes, attributed to collect Measurements, and Assert some conditions.
 
-#Step 1.
+##Step 1.
 
 Disable xUnit parrallelized execution, at either the Assembly, or Collection level. In the example, this is achived by adding the following line within the project:
 
        [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-#Step 2.
+##Step 2.
 
 Add a reference to the Pro.NBench.xUnit assembly, and include the following using statement for each class:
 
         using Pro.NBench.xUnit.XunitExtensions;
 
-#Step 3. 
+##Step 3. 
 
 Include a constructor that includes a paramater of type ITestOutputHelper, and creates a new XunitTrace listener, as follows:
 
@@ -32,7 +32,7 @@ Include a constructor that includes a paramater of type ITestOutputHelper, and c
             Trace.Listeners.Add(new XunitTraceListener(output));
         }
 
-#Step 4.
+##Step 4.
 
 Annotate each NBench test with the following attribute:
 
