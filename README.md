@@ -2,7 +2,7 @@
 
 A simple approach to allow NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
 
-Influenced by Andrea Angella's approach and article for integrating with NUnit.
+Inspired by Andrea Angella's approach and article for integrating with NUnit.
 
 http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/
 
