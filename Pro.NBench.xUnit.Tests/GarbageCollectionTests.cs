@@ -1,24 +1,40 @@
 ﻿#region Using Directives
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using NBench;
+
+using Pro.NBench.xUnit.XunitExtensions;
+
+using Xunit.Abstractions;
 
 #endregion
 
 namespace Pro.NBench.xUnit.Tests
 {
     public class GarbageCollectionTests
-    { 
+    {
         #region Fields
 
         private readonly List<int[]> _dataCache = new List<int[]>();
 
         #endregion
 
+        #region Constructors and Destructors
+
+        public GarbageCollectionTests(ITestOutputHelper output)
+        {
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new XunitTraceListener(output));
+        }
+
+        #endregion
+
         #region Public Methods and Operators
 
+        [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Iterations, TestMode = TestMode.Measurement)]
         [GcMeasurement(GcMetric.TotalCollections, GcGeneration.AllGc)]
         public void MeasureGarbageCollections()
@@ -26,6 +42,7 @@ namespace Pro.NBench.xUnit.Tests
             RunTest();
         }
 
+        [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [GcThroughputAssertion(GcMetric.TotalCollections, GcGeneration.Gen0, MustBe.LessThan, 300)]
         [GcThroughputAssertion(GcMetric.TotalCollections, GcGeneration.Gen1, MustBe.LessThan, 150)]

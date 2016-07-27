@@ -63,11 +63,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BenchmarkTestData.cs" />
-    <Compile Include="NBenchTestHelper.cs" />
-    <Compile Include="XunitTraceListener.cs" />
-    <Compile Include="NBenchTestHandler.cs" />
+    <Compile Include="NBenchExtensions\XUnitReflectionBenchmarkInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XunitExtensions\NBenchFactAttribute.cs" />
+    <Compile Include="XunitExtensions\NBenchFactDiscoverer.cs" />
+    <Compile Include="XunitExtensions\NBenchTest.cs" />
+    <Compile Include="XunitExtensions\NBenchTestCase.cs" />
+    <Compile Include="XunitExtensions\NBenchTestCaseRunner.cs" />
+    <Compile Include="XunitExtensions\NBenchTestInvoker.cs" />
+    <Compile Include="XunitExtensions\NBenchTestRunner.cs" />
+    <Compile Include="XunitExtensions\XunitTraceListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

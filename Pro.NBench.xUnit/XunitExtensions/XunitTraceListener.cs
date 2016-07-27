@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 #endregion
 
-namespace Pro.NBench.xUnit
+namespace Pro.NBench.xUnit.XunitExtensions
 {
     public class XunitTraceListener : TraceListener
     {

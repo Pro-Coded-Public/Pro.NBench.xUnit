@@ -1,15 +1,20 @@
 ﻿#region Using Directives
 
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using NBench;
+
+using Pro.NBench.xUnit.XunitExtensions;
+
+using Xunit.Abstractions;
 
 #endregion
 
 namespace Pro.NBench.xUnit.Tests
 {
     public class DictionaryThroughputTests
-    { 
+    {
         #region Constants
 
         private const int AcceptableMinAddThroughput = 20000000;
@@ -26,8 +31,19 @@ namespace Pro.NBench.xUnit.Tests
 
         #endregion
 
+        #region Constructors and Destructors
+
+        public DictionaryThroughputTests(ITestOutputHelper output)
+        {
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new XunitTraceListener(output));
+        }
+
+        #endregion
+
         #region Public Methods and Operators
 
+        [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [CounterThroughputAssertion(AddCounterName, MustBe.GreaterThan, AcceptableMinAddThroughput)]
         public void AddThroughput_IterationsMode(BenchmarkContext context)
@@ -39,6 +55,7 @@ namespace Pro.NBench.xUnit.Tests
             }
         }
 
+        [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Throughput, TestMode = TestMode.Test)]
         [CounterThroughputAssertion(AddCounterName, MustBe.GreaterThan, AcceptableMinAddThroughput)]
         public void AddThroughput_ThroughputMode(BenchmarkContext context)

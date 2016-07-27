@@ -63,7 +63,6 @@
     <Compile Include="DictionaryMemoryTests.cs" />
     <Compile Include="DictionaryThroughputTests.cs" />
     <Compile Include="GarbageCollectionTests.cs" />
-    <Compile Include="PerformanceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
