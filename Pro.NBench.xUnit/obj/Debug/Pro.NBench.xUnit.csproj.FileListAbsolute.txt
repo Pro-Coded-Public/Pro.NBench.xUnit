@@ -29,6 +29,5 @@ C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\bin\Debug\xunit.core.p
 C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\bin\Debug\xunit.core.xml
 C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\bin\Debug\xunit.execution.desktop.pdb
 C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\bin\Debug\xunit.execution.desktop.xml
-C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\obj\Debug\Pro.NBench.xUnit.csprojResolveAssemblyReference.cache
 C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\obj\Debug\Pro.NBench.xUnit.dll
 C:\Code\Projects\VS2015\Pro.NBench.xUnit\Pro.NBench.xUnit\obj\Debug\Pro.NBench.xUnit.pdb

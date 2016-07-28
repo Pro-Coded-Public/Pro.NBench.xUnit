@@ -63,10 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DelegateHelpers.cs" />
     <Compile Include="NBenchExtensions\XUnitReflectionBenchmarkInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XunitExtensions\Class1.cs" />
-    <Compile Include="XunitExtensions\Class2.cs" />
+    <Compile Include="XunitExtensions\NBenchTheoryTestCase.cs" />
     <Compile Include="XunitExtensions\NBenchTheoryDiscoverer.cs" />
     <Compile Include="XunitExtensions\NBenchTheoryAttribute.cs" />
     <Compile Include="XunitExtensions\NBenchFactAttribute.cs" />

@@ -105,30 +105,9 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         #region Methods
 
-        internal static Action<BenchmarkContext> CreateDelegateWithContext(object target, MethodInfo invocationMethod)
-        {
-            var del = (Action<BenchmarkContext>)Delegate.CreateDelegate(typeof(Action<BenchmarkContext>), target, invocationMethod);
-            return del;
-        }
-
-        internal static Action<BenchmarkContext> CreateDelegateWithoutContext(object target, MethodInfo invocationMethod)
-        {
-            var del = (Action)Delegate.CreateDelegate(typeof(Action), target, invocationMethod);
-
-            Action<BenchmarkContext> wrappedDelegate = context => del();
-            return wrappedDelegate;
-        }
-
-        private Action<BenchmarkContext> Compile(BenchmarkMethodMetadata metadata)
-        {
-            if (metadata.Skip) return ActionBenchmarkInvoker.NoOp;
-            return metadata.TakesBenchmarkContext
-                       ? CreateDelegateWithContext(_testClassInstance, metadata.InvocationMethod)
-                       : CreateDelegateWithoutContext(_testClassInstance, metadata.InvocationMethod);
-        }
-
         private MethodInfo ConstructMethod(BenchmarkMethodMetadata metadata)
         {
+            //TODO: Replace with compiled expression tree. For now, this is sufficient.
             return metadata.Skip ? null : _testClassInstance.GetType().GetMethod(metadata.InvocationMethod.Name);
         }
 

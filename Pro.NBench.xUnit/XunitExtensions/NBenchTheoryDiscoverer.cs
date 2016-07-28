@@ -59,7 +59,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
         /// <param name="theoryAttribute">The theory attribute attached to the test method.</param>
         /// <returns>The test case</returns>
         protected virtual IXunitTestCase CreateTestCaseForTheory(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
-            => new NBenchTheoryTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod);
+            => new XunitTheoryTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod);
 
         /// <summary>
         /// Creates a test case for a single row of data. By default, returns an instance of <see cref="XunitSkippedDataRowTestCase"/>
