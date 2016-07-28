@@ -25,19 +25,22 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         private readonly BenchmarkClassMetadata _metadata;
         private readonly object _testClassInstance;
+        private readonly object[] _testMethodArguments;
 
-        private Action<BenchmarkContext> _cleanupAction;
-        private Action<BenchmarkContext> _runAction;
-        private Action<BenchmarkContext> _setupAction;
+        private MethodInfo _cleanupAction;
+        private MethodInfo _runAction;
+        private MethodInfo _setupAction;
+        private long _runCount;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public XUnitReflectionBenchmarkInvoker(BenchmarkClassMetadata metadata, object testClassInstance)
+        public XUnitReflectionBenchmarkInvoker(BenchmarkClassMetadata metadata, object testClassInstance, object[] testMethodArguments)
         {
             _metadata = metadata;
             _testClassInstance = testClassInstance;
+            _testMethodArguments = testMethodArguments;
 
             BenchmarkName = $"{metadata.BenchmarkClass.FullName}+{metadata.Run.InvocationMethod.Name}";
         }
@@ -52,10 +55,28 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         #region Public Methods and Operators
 
+        public void InvokeRun(BenchmarkContext context)
+        {
+            for (var i = _runCount; i != 0;)
+            {
+                if (_testMethodArguments.Length > 0)
+                {
+                    //var args = new object[] { context };
+                    //args.me_testMethodArguments }
+                    _runAction.Invoke(_testClassInstance, _testMethodArguments );
+                }
+                else
+                {
+                    _runAction.Invoke(_testClassInstance, null);
+                }
+                --i;
+            }
+        }
+
         public void InvokePerfCleanup(BenchmarkContext context)
         {
             // cleanup method
-            _cleanupAction(context);
+            _cleanupAction?.Invoke(_testClassInstance, new object[] { context });
 
             _cleanupAction = null;
             _setupAction = null;
@@ -66,32 +87,18 @@ namespace Pro.NBench.xUnit.NBenchExtensions
         {
             if (_testClassInstance == null) { throw new Exception($"{BenchmarkName} : Test Class Instance is null"); }
 
-            _cleanupAction = Compile(_metadata.Cleanup);
-            _setupAction = Compile(_metadata.Setup);
-            _runAction = Compile(_metadata.Run);
+            _runCount = 1;
+            _cleanupAction = ConstructMethod(_metadata.Cleanup);
+            _setupAction = ConstructMethod(_metadata.Setup);
+            _runAction = ConstructMethod(_metadata.Run);
 
-            _setupAction(context);
+            _setupAction?.Invoke(_testClassInstance, new object[] { context });
         }
 
         public void InvokePerfSetup(long runCount, BenchmarkContext context)
         {
             InvokePerfSetup(context);
-
-            var previousRunAction = _runAction;
-
-            _runAction = ctx =>
-                {
-                    for (var i = runCount; i != 0;)
-                    {
-                        previousRunAction(ctx);
-                        --i;
-                    }
-                };
-        }
-
-        public void InvokeRun(BenchmarkContext context)
-        {
-            _runAction(context);
+            _runCount = runCount;
         }
 
         #endregion
@@ -118,6 +125,11 @@ namespace Pro.NBench.xUnit.NBenchExtensions
             return metadata.TakesBenchmarkContext
                        ? CreateDelegateWithContext(_testClassInstance, metadata.InvocationMethod)
                        : CreateDelegateWithoutContext(_testClassInstance, metadata.InvocationMethod);
+        }
+
+        private MethodInfo ConstructMethod(BenchmarkMethodMetadata metadata)
+        {
+            return metadata.Skip ? null : _testClassInstance.GetType().GetMethod(metadata.InvocationMethod.Name);
         }
 
         #endregion

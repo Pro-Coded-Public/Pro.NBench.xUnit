@@ -59,6 +59,21 @@ namespace Pro.NBench.xUnit.Tests
             Populate(dictionary, NumberOfAdds);
         }
 
+
+        [PerfBenchmark(Description = "AddMemoryMeasurement_Theory", RunMode = RunMode.Iterations, TestMode = TestMode.Measurement)]
+        [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
+        [NBenchTheory]
+        [InlineData(1000)]
+        [InlineData(10000)]
+        [InlineData(100000)]
+        [InlineData(1000000)]
+        public void AddMemory_Measurement_Theory(int numberOfAdds)
+        {
+            var dictionary = new Dictionary<int, int>();
+
+            Populate(dictionary, numberOfAdds);
+        }
+
         [PerfBenchmark(Description = "AddMemory_PassingTest", RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [MemoryAssertion(MemoryMetric.TotalBytesAllocated, MustBe.LessThan, MaxExpectedMemory * 2)]
         [NBenchFact]

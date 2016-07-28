@@ -1,0 +1,8 @@
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\bin\Debug\NUnitPerformanceTesting.dll
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\bin\Debug\NUnitPerformanceTesting.pdb
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\bin\Debug\NBench.dll
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\bin\Debug\nunit.framework.dll
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\bin\Debug\nunit.framework.xml
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\obj\Debug\NUnitPerformanceTesting.csprojResolveAssemblyReference.cache
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\obj\Debug\NUnitPerformanceTesting.dll
+C:\Code\Projects\VS2015\dotnetalgorithms-master\dotnetalgorithms-master\NBench\TestingWithNUnit\obj\Debug\NUnitPerformanceTesting.pdb

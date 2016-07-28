@@ -1,5 +1,6 @@
 ﻿#region Using Directives
 
+using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
