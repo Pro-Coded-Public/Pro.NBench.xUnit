@@ -85,15 +85,15 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
                     if (results.AssertionResults.Count > 0)
                     {
-                        //TODO: We should determine the accurate elapsed time at this point
+                        //TODO: We should determine the accurate elapsed time at this point, to report it in the xUnit runner.
                         summary.Time = (decimal)results.Data.StatsByMetric.Values.First().Runs.First().ElapsedSeconds;
 
                         foreach (var assertion in results.AssertionResults)
                         {
-                            //TODO: Maybe it is bubble to bubble this up?
+                            //TODO: Maybe it is bubble to bubble this up, and provide the original line number?
                             Assert.True(assertion.Passed, assertion.Message);
 
-                            //summary.Total++;
+                            summary.Total++;
                             if (!assertion.Passed) { summary.Failed++; }
                             Trace.WriteLine(assertion.Message);
                             Trace.WriteLine("");
@@ -114,21 +114,21 @@ namespace Pro.NBench.xUnit.XunitExtensions
                         {
                             Trace.WriteLine("Metric : " + measurement.Key.ToHumanFriendlyString());
                             Trace.WriteLine("");
-                            Trace.WriteLine($"     Per Second ( {measurement.Value.Unit} )");
+                            Trace.WriteLine($"Per Second ( {measurement.Value.Unit} )");
 
-                            Trace.WriteLine($"        Average : {measurement.Value.PerSecondStats.Average}");
-                            Trace.WriteLine($"            Max : {measurement.Value.PerSecondStats.Max}");
-                            Trace.WriteLine($"            Min : {measurement.Value.PerSecondStats.Min}");
-                            Trace.WriteLine($" Std. Deviation : {measurement.Value.PerSecondStats.StandardDeviation}");
-                            Trace.WriteLine($"     Std. Error : {measurement.Value.PerSecondStats.StandardError}");
+                            Trace.WriteLine($"Average         : {measurement.Value.PerSecondStats.Average}");
+                            Trace.WriteLine($"Max             : {measurement.Value.PerSecondStats.Max}");
+                            Trace.WriteLine($"Min             : {measurement.Value.PerSecondStats.Min}");
+                            Trace.WriteLine($"Std. Deviation  : {measurement.Value.PerSecondStats.StandardDeviation}");
+                            Trace.WriteLine($"Std. Error      : {measurement.Value.PerSecondStats.StandardError}");
                             Trace.WriteLine("");
 
-                            Trace.WriteLine($"      Per Test ( {measurement.Value.Unit} )");
-                            Trace.WriteLine($"       Average : {measurement.Value.Stats.Average}");
-                            Trace.WriteLine($"           Max : {measurement.Value.Stats.Max}");
-                            Trace.WriteLine($"           Min : {measurement.Value.Stats.Min}");
-                            Trace.WriteLine($"Std. Deviation : {measurement.Value.Stats.StandardDeviation}");
-                            Trace.WriteLine($"    Std. Error : {measurement.Value.Stats.StandardError}");
+                            Trace.WriteLine($"Per Test ( {measurement.Value.Unit} )");
+                            Trace.WriteLine($"Average         : {measurement.Value.Stats.Average}");
+                            Trace.WriteLine($"Max             : {measurement.Value.Stats.Max}");
+                            Trace.WriteLine($"Min             : {measurement.Value.Stats.Min}");
+                            Trace.WriteLine($"Std. Deviation  : {measurement.Value.Stats.StandardDeviation}");
+                            Trace.WriteLine($"Std. Error      : {measurement.Value.Stats.StandardError}");
 
                             Trace.WriteLine("");
                             Trace.WriteLine("----------");

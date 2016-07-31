@@ -1,7 +1,4 @@
-﻿// Copyright (c) Petabridge <https://petabridge.com/>. All rights reserved.
-// Licensed under the Apache 2.0 license. See LICENSE file in the project root for full license information.
-
-#region Using Directives
+﻿#region Using Directives
 
 using System;
 using System.Reflection;
@@ -10,37 +7,44 @@ using NBench;
 using NBench.Sdk;
 using NBench.Sdk.Compiler;
 
+using Pro.NBench.xUnit.DynamicMethodDelegates;
+
 #endregion
 
 namespace Pro.NBench.xUnit.NBenchExtensions
 {
     /// <summary>
-    ///     <see cref="IBenchmarkInvoker" /> implementaton specific to integration with xUnit,, that uses reflection to invoke
-    ///     setup / run / cleanup methods
-    ///     found on classes decorated with the appropriate <see cref="PerfBenchmarkAttribute" />s.
+    ///     <see cref="IBenchmarkInvoker" /> implementaton specific to integration with xUnit, that uses reflection to invoke
+    ///     setup / run / cleanup methods found on classes decorated with the appropriate <see cref="PerfBenchmarkAttribute" />
+    ///     s.
+    ///     Works with both xUnit Facts, and Theories.
     /// </summary>
     public class XUnitReflectionBenchmarkInvoker : IBenchmarkInvoker
     {
+        #region Static Fields
+
+        private static object[] _testParamaters;
+
+        #endregion
+
         #region Fields
 
         private readonly BenchmarkClassMetadata _metadata;
         private readonly object _testClassInstance;
-        private readonly object[] _testMethodArguments;
 
-        private MethodInfo _cleanupAction;
-        private MethodInfo _runAction;
-        private MethodInfo _setupAction;
-        private long _runCount;
+        private Action<BenchmarkContext> _cleanupAction;
+        private Action<BenchmarkContext> _runAction;
+        private Action<BenchmarkContext> _setupAction;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public XUnitReflectionBenchmarkInvoker(BenchmarkClassMetadata metadata, object testClassInstance, object[] testMethodArguments)
+        public XUnitReflectionBenchmarkInvoker(BenchmarkClassMetadata metadata, object testClassInstance, object[] testParamaters)
         {
             _metadata = metadata;
             _testClassInstance = testClassInstance;
-            _testMethodArguments = testMethodArguments;
+            _testParamaters = testParamaters;
 
             BenchmarkName = $"{metadata.BenchmarkClass.FullName}+{metadata.Run.InvocationMethod.Name}";
         }
@@ -55,28 +59,10 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         #region Public Methods and Operators
 
-        public void InvokeRun(BenchmarkContext context)
-        {
-            for (var i = _runCount; i != 0;)
-            {
-                if (_testMethodArguments.Length > 0)
-                {
-                    //var args = new object[] { context };
-                    //args.me_testMethodArguments }
-                    _runAction.Invoke(_testClassInstance, _testMethodArguments );
-                }
-                else
-                {
-                    _runAction.Invoke(_testClassInstance, null);
-                }
-                --i;
-            }
-        }
-
         public void InvokePerfCleanup(BenchmarkContext context)
         {
             // cleanup method
-            _cleanupAction?.Invoke(_testClassInstance, new object[] { context });
+            _cleanupAction(context);
 
             _cleanupAction = null;
             _setupAction = null;
@@ -87,28 +73,82 @@ namespace Pro.NBench.xUnit.NBenchExtensions
         {
             if (_testClassInstance == null) { throw new Exception($"{BenchmarkName} : Test Class Instance is null"); }
 
-            _runCount = 1;
-            _cleanupAction = ConstructMethod(_metadata.Cleanup);
-            _setupAction = ConstructMethod(_metadata.Setup);
-            _runAction = ConstructMethod(_metadata.Run);
+            _cleanupAction = Compile(_metadata.Cleanup);
+            _setupAction = Compile(_metadata.Setup);
+            _runAction = Compile(_metadata.Run);
 
-            _setupAction?.Invoke(_testClassInstance, new object[] { context });
+            _setupAction(context);
         }
 
         public void InvokePerfSetup(long runCount, BenchmarkContext context)
         {
             InvokePerfSetup(context);
-            _runCount = runCount;
+
+            var previousRunAction = _runAction;
+
+            _runAction = ctx =>
+                {
+                    for (var i = runCount; i != 0;)
+                    {
+                        previousRunAction(ctx);
+                        --i;
+                    }
+                };
+        }
+
+        public void InvokeRun(BenchmarkContext context)
+        {
+            _runAction(context);
         }
 
         #endregion
 
         #region Methods
 
-        private MethodInfo ConstructMethod(BenchmarkMethodMetadata metadata)
+        internal static Action<BenchmarkContext> CreateDelegateWithContext(object target, MethodInfo invocationMethod)
         {
-            //TODO: Replace with compiled expression tree. For now, this is sufficient.
-            return metadata.Skip ? null : _testClassInstance.GetType().GetMethod(metadata.InvocationMethod.Name);
+            // As the base method DOES accept a BenchmarkContext as a paramater, we test to see if any other method paramaters are required.
+            if (invocationMethod.GetParameters().Length == 1)
+            {
+                // If no additional paramaters are required, we create a simple Delegate to the method, that already matches the signature
+                // Action<BenchmarkContext>
+                var simpleDelegate = (Action<BenchmarkContext>)Delegate.CreateDelegate(typeof(Action<BenchmarkContext>), target, invocationMethod);
+                return simpleDelegate;
+            }
+
+            // If additional paramaters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n paramaters, of any type.
+            var paramaterisedDelegate = DynamicMethodDelegateFactory.CreateMethodCaller(invocationMethod);
+            // As we require a known Action signature, we wrap the delegate in one that specifies Action<BenchmarkContext>  
+            Action<BenchmarkContext> wrappedParamaterisedDelegate = context => paramaterisedDelegate(target, _testParamaters);
+            return wrappedParamaterisedDelegate;
+        }
+
+        internal static Action<BenchmarkContext> CreateDelegateWithoutContext(object target, MethodInfo invocationMethod)
+        {
+            // As the base method does not accept a BenchmarkContext as a paramater, and a known Action delegate signature is 
+            // required for the sake of performance, we test to see if any method paramaters are required.
+            if (invocationMethod.GetParameters().Length == 0)
+            {
+                // If no paramaters are required, we create a simple Delegate to the method.
+                var simpleDelegate = (Action)Delegate.CreateDelegate(typeof(Action), target, invocationMethod);
+                // As we require a knownAction signature, we wrap the simple delegate in one that specifies Action<BenchmarkContext>                
+                Action<BenchmarkContext> wrappedSimpleDelegate = context => simpleDelegate();
+                return wrappedSimpleDelegate;
+            }
+
+            // If paramaters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n paramaters, of any type.
+            var paramaterisedDelegate = DynamicMethodDelegateFactory.CreateMethodCaller(invocationMethod);
+            // Again, as we require a known Action signature, we wrap the delegate in one that specifies Action<BenchmarkContext> 
+            Action<BenchmarkContext> wrappedParamaterisedDelegate = context => paramaterisedDelegate(target, _testParamaters);
+            return wrappedParamaterisedDelegate;
+        }
+
+        private Action<BenchmarkContext> Compile(BenchmarkMethodMetadata metadata)
+        {
+            if (metadata.Skip) return ActionBenchmarkInvoker.NoOp;
+            return metadata.TakesBenchmarkContext
+                       ? CreateDelegateWithContext(_testClassInstance, metadata.InvocationMethod)
+                       : CreateDelegateWithoutContext(_testClassInstance, metadata.InvocationMethod);
         }
 
         #endregion

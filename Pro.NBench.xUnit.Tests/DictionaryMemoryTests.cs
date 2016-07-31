@@ -69,7 +69,7 @@ namespace Pro.NBench.xUnit.Tests
         [InlineData(1000000)]
         public void AddMemory_Measurement_Theory(int numberOfAdds)
         {
-            var dictionary = new Dictionary<int, int>();
+            var dictionary = new Dictionary<int, int>(numberOfAdds);
 
             Populate(dictionary, numberOfAdds);
         }
@@ -82,6 +82,20 @@ namespace Pro.NBench.xUnit.Tests
             var dictionary = new Dictionary<int, int>(NumberOfAdds);
 
             Populate(dictionary, NumberOfAdds);
+        }
+
+        [PerfBenchmark(Description = "AddMemory_PassingTest", RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
+        [MemoryAssertion(MemoryMetric.TotalBytesAllocated, MustBe.LessThan, MaxExpectedMemory * 2)]
+        [NBenchTheory]
+        [InlineData(1000, "One Thousand")]
+        [InlineData(10000, "Ten Thousand")]
+        [InlineData(100000, "One Hundred Thousand")]
+        [InlineData(1000000, "One Million")]
+        public void AddMemory_Test_Theory(int numberOfAdds, string description)
+        {
+            var dictionary = new Dictionary<int, int>(numberOfAdds);
+
+            Populate(dictionary, numberOfAdds);
         }
 
         public void Populate(Dictionary<int, int> dictionary, int n)

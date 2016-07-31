@@ -46,7 +46,7 @@ namespace Pro.NBench.xUnit.Tests
         [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [CounterThroughputAssertion(AddCounterName, MustBe.GreaterThan, AcceptableMinAddThroughput)]
-        public void AddThroughput_IterationsMode(BenchmarkContext context)
+        public void AddThroughput_IterationsMode()
         {
             for (var i = 0; i < AcceptableMinAddThroughput; i++)
             {
@@ -58,7 +58,7 @@ namespace Pro.NBench.xUnit.Tests
         [NBenchFact]
         [PerfBenchmark(RunMode = RunMode.Throughput, TestMode = TestMode.Test)]
         [CounterThroughputAssertion(AddCounterName, MustBe.GreaterThan, AcceptableMinAddThroughput)]
-        public void AddThroughput_ThroughputMode(BenchmarkContext context)
+        public void AddThroughput_ThroughputMode()
         {
             _dictionary.Add(_key++, _key);
             _addCounter.Increment();
