@@ -58,11 +58,11 @@ Please note, the example includes a variety of passing, and a deliberately faili
 
 ##Future plans
 
-a) Release as NuGet package.
+- [ ]  Release as NuGet package.
 
-b) Possibly include integration with xUnit Theories.
+- [x] Possibly include integration with xUnit Theories.
 
-c) Possibly standard NBench Markdown Report output.
+- [ ]  Possibly standard NBench Markdown Report output.
 
 
 --
