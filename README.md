@@ -1,5 +1,7 @@
 # Pro.NBench.xUnit
 
+NOTE: Current check in has some experimental code to support xUnit Theories, which may cause issues. Will be updated shortly.
+
 A simple approach to allow NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
 
 Inspired by Andrea Angella's approach and article for integrating with NUnit.
