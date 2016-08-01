@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NBench, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NBench.0.3.0\lib\net45\NBench.dll</HintPath>
+      <HintPath>..\packages\NBench.0.3.0\lib\net45\NBench.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
