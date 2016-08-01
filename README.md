@@ -52,7 +52,7 @@ The NBench Tests will be discovered and displayed in either the Resharper or Vis
 
 Breakpoints in the NBench benchmarks are fully supported for debugging.
 
-**Please note, it is important that for benchhmarking purposes, that thee Tests are run in Release configuration, to allow compiler optimisations to be applied.**
+**Please note, it is important that for accurate benchhmarking purposes, that the Tests are run in Release configuration, to allow compiler optimisations to be applied.**
 
 When executed using ReSharper, the Tests are displayed, with the result of NBench Assertions, and any Measurements reported by each Test.
 
