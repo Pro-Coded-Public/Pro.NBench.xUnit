@@ -6,9 +6,11 @@ Inspired by Andrea Angella's approach and article for integrating with NUnit.
 
 http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/
 
-##Updates
+##Installation
 
-Added support for xUnit Theories, as well as standard Facts.
+To install Pro.NBench.xUnit (Integration of NBench, xUnit and ReSharper / Visual Studio Test Explorer), run the following command in the Package Manager Console
+
+        Install-Package Pro.NBench.xUnit -Pre
 
 ##Usage
 
