@@ -109,7 +109,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
                     {
                         var discovererAttribute = dataAttribute.GetCustomAttributes(typeof(DataDiscovererAttribute)).First();
                         var discoverer = ExtensibilityPointFactory.GetDataDiscoverer(diagnosticMessageSink, discovererAttribute);
-                        skipReason = dataAttribute.GetNamedArgument<string>("Skip");
+                        //skipReason = dataAttribute.GetNamedArgument<string>("Skip");
 
                         if (!discoverer.SupportsDiscoveryEnumeration(dataAttribute, testMethod.Method))
                             return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, theoryAttribute) };
