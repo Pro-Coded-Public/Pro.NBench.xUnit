@@ -73,8 +73,8 @@ namespace Pro.NBench.xUnit.XunitExtensions
         /// <param name="dataRow">The row of data for this test case.</param>
         /// <param name="skipReason">The reason this test case is to be skipped</param>
         /// <returns>The test case</returns>
-        protected virtual IXunitTestCase CreateTestCaseForSkippedDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow, string skipReason)
-            => new XunitSkippedDataRowTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod, skipReason, dataRow);
+        //protected virtual IXunitTestCase CreateTestCaseForSkippedDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow, string skipReason)
+        //    => new XunitSkippedDataRowTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod, skipReason, dataRow);
 
         /// <summary>
         /// Discover test cases from a test method.
@@ -118,6 +118,8 @@ namespace Pro.NBench.xUnit.XunitExtensions
                         // down below so that we get the composite test case.
                         foreach (var dataRow in discoverer.GetData(dataAttribute, testMethod.Method))
                         {
+
+                            //TODO: Revisit when xUnit beta is released to Production
                             // Determine whether we can serialize the test case, since we need a way to uniquely
                             // identify a test and serialization is the best way to do that. If it's not serializable,
                             // this will throw and we will fall back to a single theory test case that gets its data at runtime.
@@ -127,10 +129,11 @@ namespace Pro.NBench.xUnit.XunitExtensions
                             //    return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, theoryAttribute) };
                             //}
 
-                            var testCase =
-                                skipReason != null
-                                    ? CreateTestCaseForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
-                                    : CreateTestCaseForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
+                            //var testCase =
+                            //    skipReason != null
+                            //        ? CreateTestCaseForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
+                            //        : CreateTestCaseForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
+                            var testCase = CreateTestCaseForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
 
                             results.Add(testCase);
                         }
