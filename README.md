@@ -10,7 +10,7 @@ http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-
 
 To install Pro.NBench.xUnit (Integration of NBench, xUnit and ReSharper / Visual Studio Test Explorer), run the following command in the Package Manager Console
 
-        Install-Package Pro.NBench.xUnit -Pre
+        Install-Package Pro.NBench.xUnit
 
 ##Usage
 
