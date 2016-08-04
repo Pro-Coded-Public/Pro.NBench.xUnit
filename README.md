@@ -1,14 +1,16 @@
 # Pro.NBench.xUnit
 
-A simple approach to allow NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
+A simple approach to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
 
 Inspired by Andrea Angella's approach and article for integrating with NUnit.
 
 http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/
 
-##Updates
+##Installation
 
-Added support for xUnit Theories, as well as standard Facts.
+To install Pro.NBench.xUnit (Integration of NBench, xUnit and ReSharper / Visual Studio Test Explorer), run the following command in the Package Manager Console
+
+        Install-Package Pro.NBench.xUnit -Pre
 
 ##Usage
 
@@ -42,11 +44,15 @@ Annotate each NBench test with the following attribute:
 
         [NBenchFact]
 
+You can also use xUnit Theories, by adding:
 
+        [NBenchTheory]
 
-The NBench Tests will be discovered and displayed in either the Resharper or Visual Studio Test Runners
+The NBench Tests will be discovered and displayed in either the Resharper or Visual Studio Test Runners.
 
 Breakpoints in the NBench benchmarks are fully supported for debugging.
+
+**Please note, it is important that for accurate benchhmarking purposes, that the Tests are run in Release configuration, to allow compiler optimisations to be applied.**
 
 When executed using ReSharper, the Tests are displayed, with the result of NBench Assertions, and any Measurements reported by each Test.
 
@@ -58,9 +64,9 @@ Please note, the example includes a variety of passing, and a deliberately faili
 
 ##Future plans
 
-- [ ]  Release as NuGet package.
+- [x]  Release as NuGet package.
 
-- [x] Possibly include integration with xUnit Theories.
+- [x]  Possibly include integration with xUnit Theories.
 
 - [ ]  Possibly standard NBench Markdown Report output.
 
