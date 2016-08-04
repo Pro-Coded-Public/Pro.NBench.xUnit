@@ -56,7 +56,7 @@ Breakpoints in the NBench benchmarks are fully supported for debugging.
 
 When executed using ReSharper, the Tests are displayed, with the result of NBench Assertions, and any Measurements reported by each Test.
 
-![ResharperResults](ResharperResults.PNG)
+![ResharperResults](ResharperResults2.PNG)
 
 Visual Studio Test Explorer will also execute and debug the Tests, but presentation of results is less polished.
 
