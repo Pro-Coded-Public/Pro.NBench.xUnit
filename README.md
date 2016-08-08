@@ -1,10 +1,11 @@
 # Pro.NBench.xUnit
 
-A simple approach to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
+A project to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in ReSharper, and to a less polished extent, in Visual Studio Test Explorer.
 
-Inspired by Andrea Angella's approach and article for integrating with NUnit.
+Inspired by Andrea Angella's approach and article for [integrating NBench with NUnit](http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/).
 
-http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/
+Please refer to the [Introduction to NBench](https://petabridge.com/blog/introduction-to-nbench/) as a starting point for information on how to configure NBench Tests and Measurements.
+
 
 ##Installation
 
@@ -66,9 +67,11 @@ Please note, the example includes a variety of passing, and a deliberately faili
 
 - [x]  Release as NuGet package.
 
-- [x]  Possibly include integration with xUnit Theories.
+- [x]  Integration with xUnit Theories, to support paramaterised tests.
 
 - [ ]  Possibly standard NBench Markdown Report output.
+
+- [ ]  Possibly a Visual Studio Template for a pre-configured Test Project and Test Class.
 
 
 --
