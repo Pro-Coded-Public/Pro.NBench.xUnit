@@ -17,7 +17,7 @@ To install Pro.NBench.xUnit (Integration of NBench, xUnit and ReSharper / Visual
 
 The Tests project serves as an example, and contains a set of three standard NBench test classes, attributed to collect Measurements, and Assert some conditions.
 
-##Step 1.
+## Step 1.
 
 Disable xUnit parrallelized execution, at either the Assembly, or Collection level. In the example, this is achived by adding the following line within the project:
 
