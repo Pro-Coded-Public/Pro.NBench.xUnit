@@ -7,13 +7,13 @@ Inspired by Andrea Angella's approach and article for [integrating NBench with N
 Please refer to the [Introduction to NBench](https://petabridge.com/blog/introduction-to-nbench/) as a starting point for information on how to configure NBench Tests and Measurements.
 
 
-##Installation
+## Installation
 
 To install Pro.NBench.xUnit (Integration of NBench, xUnit and ReSharper / Visual Studio Test Explorer), run the following command in the Package Manager Console
 
         Install-Package Pro.NBench.xUnit
 
-##Usage
+## Usage
 
 The Tests project serves as an example, and contains a set of three standard NBench test classes, attributed to collect Measurements, and Assert some conditions.
 
@@ -23,13 +23,13 @@ Disable xUnit parrallelized execution, at either the Assembly, or Collection lev
 
        [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-##Step 2.
+## Step 2.
 
 Add a reference to the Pro.NBench.xUnit assembly, and include the following using statement for each class:
 
         using Pro.NBench.xUnit.XunitExtensions;
 
-##Step 3. 
+## Step 3. 
 
 Include a constructor that includes a paramater of type ITestOutputHelper, and creates a new XunitTrace listener, as follows:
 
@@ -39,7 +39,7 @@ Include a constructor that includes a paramater of type ITestOutputHelper, and c
             Trace.Listeners.Add(new XunitTraceListener(output));
         }
 
-##Step 4.
+## Step 4.
 
 Annotate each NBench test with the following attribute:
 
@@ -63,7 +63,7 @@ Visual Studio Test Explorer will also execute and debug the Tests, but presentat
 
 Please note, the example includes a variety of passing, and a deliberately failing Test.
 
-##Future plans
+## Future plans
 
 - [x]  Release as NuGet package.
 
