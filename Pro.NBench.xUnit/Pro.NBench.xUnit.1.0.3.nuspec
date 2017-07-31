@@ -8,7 +8,7 @@
         <owners>Pro-Coded</owners>
         <licenseUrl>https://raw.githubusercontent.com/Pro-Coded/Pro.NBench.xUnit/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</projectUrl>
-        <iconUrl>http://imgur.com/h9IyPIm</iconUrl>
+        <iconUrl>http://i.imgur.com/h9IyPIm.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Allows NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and Visual Studio Test Explorer.
 
