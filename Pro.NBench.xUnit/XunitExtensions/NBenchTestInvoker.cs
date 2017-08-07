@@ -160,7 +160,9 @@ namespace Pro.NBench.xUnit.XunitExtensions
             catch (ReflectionTypeLoadException ex)
             {
                 foreach(var e in ex.LoaderExceptions)
-                Trace.WriteLine(e);
+                     Trace.WriteLine(e);
+
+                throw ex;
             }
 
             return summary;
