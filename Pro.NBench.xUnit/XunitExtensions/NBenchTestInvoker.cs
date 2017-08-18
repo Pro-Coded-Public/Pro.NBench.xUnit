@@ -145,14 +145,25 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
             //TODO: At the moment this is performing work that is not required, but is pragmatic in that a change is not required to the NBench core.
             var benchmarkMetaData = ReflectionDiscovery.CreateBenchmarksForClass(testClassType).First(b => b.Run.InvocationMethod.Name == TestMethod.Name);
+            try
+            {
+                var invoker =
+                    new XUnitReflectionBenchmarkInvoker(benchmarkMetaData, testClassInstance, TestMethodArguments);
 
-            var invoker = new XUnitReflectionBenchmarkInvoker(benchmarkMetaData, testClassInstance, TestMethodArguments);
-            var settings = discovery.CreateSettingsForBenchmark(benchmarkMetaData);
-            var benchmark = new Benchmark(settings, invoker, discovery.Output, discovery.BenchmarkAssertions);
+                var settings = discovery.CreateSettingsForBenchmark(benchmarkMetaData);
+                var benchmark = new Benchmark(settings, invoker, discovery.Output, discovery.BenchmarkAssertions);
 
-            Benchmark.PrepareForRun();
-            benchmark.Run();
-            benchmark.Finish();
+                Benchmark.PrepareForRun();
+                benchmark.Run();
+                benchmark.Finish();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                foreach(var e in ex.LoaderExceptions)
+                     Trace.WriteLine(e);
+
+                throw ex;
+            }
 
             return summary;
         }
