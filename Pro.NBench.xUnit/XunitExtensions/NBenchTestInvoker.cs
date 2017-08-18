@@ -73,6 +73,11 @@ namespace Pro.NBench.xUnit.XunitExtensions
             return runSummary.Time;
         }
 
+
+        private void WriteTestOutput(string output)
+        {
+            MessageBus.QueueMessage(new TestOutput(Test, ""));
+        }
         private RunSummary RunNBenchTest(object testClassInstance)
         {
             //TODO: It is not strictly reuired to use a RunSummary at the moment - needs more investigation to see
@@ -81,7 +86,8 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
             var discovery = new ReflectionDiscovery(new ActionBenchmarkOutput(report => { }, results =>
                 {
-                    Trace.WriteLine("");
+
+                    WriteTestOutput("");
 
                     if (results.AssertionResults.Count > 0)
                     {
@@ -95,49 +101,49 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
                             summary.Total++;
                             if (!assertion.Passed) { summary.Failed++; }
-                            Trace.WriteLine(assertion.Message);
-                            Trace.WriteLine("");
+                            WriteTestOutput(assertion.Message);
+                            WriteTestOutput("");
                         }
                     }
                     else
                     {
-                        Trace.WriteLine("No assertions returned.");
+                         WriteTestOutput("No assertions returned.");
                     }
 
-                    Trace.WriteLine("");
-                    Trace.WriteLine("---------- Measurements ----------");
-                    Trace.WriteLine("");
+                     WriteTestOutput("");
+                     WriteTestOutput("---------- Measurements ----------");
+                     WriteTestOutput("");
 
                     if (results.Data.StatsByMetric.Count > 0)
                     {
                         foreach (var measurement in results.Data.StatsByMetric)
                         {
-                            Trace.WriteLine("Metric : " + measurement.Key.ToHumanFriendlyString());
-                            Trace.WriteLine("");
-                            Trace.WriteLine($"Per Second ( {measurement.Value.Unit} )");
+                             WriteTestOutput("Metric : " + measurement.Key.ToHumanFriendlyString());
+                             WriteTestOutput("");
+                             WriteTestOutput($"Per Second ( {measurement.Value.Unit} )");
 
-                            Trace.WriteLine($"Average         : {measurement.Value.PerSecondStats.Average}");
-                            Trace.WriteLine($"Max             : {measurement.Value.PerSecondStats.Max}");
-                            Trace.WriteLine($"Min             : {measurement.Value.PerSecondStats.Min}");
-                            Trace.WriteLine($"Std. Deviation  : {measurement.Value.PerSecondStats.StandardDeviation}");
-                            Trace.WriteLine($"Std. Error      : {measurement.Value.PerSecondStats.StandardError}");
-                            Trace.WriteLine("");
+                             WriteTestOutput($"Average         : {measurement.Value.PerSecondStats.Average}");
+                             WriteTestOutput($"Max             : {measurement.Value.PerSecondStats.Max}");
+                             WriteTestOutput($"Min             : {measurement.Value.PerSecondStats.Min}");
+                             WriteTestOutput($"Std. Deviation  : {measurement.Value.PerSecondStats.StandardDeviation}");
+                             WriteTestOutput($"Std. Error      : {measurement.Value.PerSecondStats.StandardError}");
+                             WriteTestOutput("");
 
-                            Trace.WriteLine($"Per Test ( {measurement.Value.Unit} )");
-                            Trace.WriteLine($"Average         : {measurement.Value.Stats.Average}");
-                            Trace.WriteLine($"Max             : {measurement.Value.Stats.Max}");
-                            Trace.WriteLine($"Min             : {measurement.Value.Stats.Min}");
-                            Trace.WriteLine($"Std. Deviation  : {measurement.Value.Stats.StandardDeviation}");
-                            Trace.WriteLine($"Std. Error      : {measurement.Value.Stats.StandardError}");
+                             WriteTestOutput($"Per Test ( {measurement.Value.Unit} )");
+                             WriteTestOutput($"Average         : {measurement.Value.Stats.Average}");
+                             WriteTestOutput($"Max             : {measurement.Value.Stats.Max}");
+                             WriteTestOutput($"Min             : {measurement.Value.Stats.Min}");
+                             WriteTestOutput($"Std. Deviation  : {measurement.Value.Stats.StandardDeviation}");
+                             WriteTestOutput($"Std. Error      : {measurement.Value.Stats.StandardError}");
 
-                            Trace.WriteLine("");
-                            Trace.WriteLine("----------");
-                            Trace.WriteLine("");
+                             WriteTestOutput("");
+                             WriteTestOutput("----------");
+                             WriteTestOutput("");
                         }
                     }
                     else
                     {
-                        Trace.WriteLine("No measurements returned.");
+                         WriteTestOutput("No measurements returned.");
                     }
                 }));
 
@@ -160,9 +166,9 @@ namespace Pro.NBench.xUnit.XunitExtensions
             catch (ReflectionTypeLoadException ex)
             {
                 foreach(var e in ex.LoaderExceptions)
-                     Trace.WriteLine(e);
+                    WriteTestOutput(e.ToString());
 
-                throw ex;
+                throw;
             }
 
             return summary;

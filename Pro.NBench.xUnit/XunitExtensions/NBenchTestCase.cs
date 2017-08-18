@@ -12,7 +12,6 @@ using Xunit.Sdk;
 
 namespace Pro.NBench.xUnit.XunitExtensions
 {
-    [Serializable]
     public class NBenchTestCase : XunitTestCase
     {
         #region Constructors and Destructors

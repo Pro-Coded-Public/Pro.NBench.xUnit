@@ -26,17 +26,7 @@ namespace Pro.NBench.xUnit.Tests
         private const int NumberOfAdds = 1000000;
 
         #endregion
-
-        #region Constructors and Destructors
-
-        public DictionaryMemoryTests(ITestOutputHelper output)
-        {
-            Trace.Listeners.Clear();
-            Trace.Listeners.Add(new XunitTraceListener(output));
-        }
-
-        #endregion
-
+        
         #region Public Methods and Operators
 
         [PerfBenchmark(RunMode = RunMode.Iterations, TestMode = TestMode.Test, Description = "Dictionary without capacity, add memory test.")]

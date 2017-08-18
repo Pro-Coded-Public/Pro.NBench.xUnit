@@ -22,16 +22,6 @@ namespace Pro.NBench.xUnit.Tests
 
         #endregion
 
-        #region Constructors and Destructors
-
-        public GarbageCollectionTests(ITestOutputHelper output)
-        {
-            Trace.Listeners.Clear();
-            Trace.Listeners.Add(new XunitTraceListener(output));
-        }
-
-        #endregion
-
         #region Public Methods and Operators
 
         [NBenchFact]

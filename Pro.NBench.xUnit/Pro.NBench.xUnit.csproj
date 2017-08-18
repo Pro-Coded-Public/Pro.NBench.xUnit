@@ -1,83 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2F850F8-8406-4B0F-BCFA-9BB74C8D9673}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pro.NBench.xUnit</RootNamespace>
-    <AssemblyName>Pro.NBench.xUnit</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <Version>1.0.3</Version>
+    <Authors>Pro-Coded,David Paul McQuiggin</Authors>
+    <Company>Pro-Coded</Company>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Pro-Coded/Pro.NBench.xUnit/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</PackageProjectUrl>
+    <PackageIconUrl>http://i.imgur.com/h9IyPIm.png</PackageIconUrl>
+    <Description>Allows NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and Visual Studio Test Explorer.
+
+Please refer to the project Url for usage information:
+
+https://github.com/Pro-Coded/Pro.NBench.xUnit</Description>
+    <Copyright>Pro-Coded 2017</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</RepositoryUrl>
+    <PackageTags>NBench xUnit Resharper</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="NBench, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NBench.1.0.4\lib\net452\NBench.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NBench" Version="1.0.4" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="XUnit" Version="2.2.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DynamicMethodDelegates\DynamicMethodDelegate.cs" />
-    <Compile Include="DynamicMethodDelegates\DynamicMethodDelegateFactory.cs" />
-    <Compile Include="NBenchExtensions\XUnitReflectionBenchmarkInvoker.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XunitExtensions\NBenchTheoryDiscoverer.cs" />
-    <Compile Include="XunitExtensions\NBenchTheoryAttribute.cs" />
-    <Compile Include="XunitExtensions\NBenchFactAttribute.cs" />
-    <Compile Include="XunitExtensions\NBenchFactDiscoverer.cs" />
-    <Compile Include="XunitExtensions\NBenchTest.cs" />
-    <Compile Include="XunitExtensions\NBenchTestCase.cs" />
-    <Compile Include="XunitExtensions\NBenchTestCaseRunner.cs" />
-    <Compile Include="XunitExtensions\NBenchTestInvoker.cs" />
-    <Compile Include="XunitExtensions\NBenchTestRunner.cs" />
-    <Compile Include="XunitExtensions\XunitTraceListener.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Pro.NBench.xUnit.1.0.3.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
