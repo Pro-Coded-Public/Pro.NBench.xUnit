@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+      <IsPackable>true</IsPackable>
     <TargetFramework>netstandard1.6</TargetFramework>
     <Version>1.0.3</Version>
     <Authors>Pro-Coded,David Paul McQuiggin</Authors>
