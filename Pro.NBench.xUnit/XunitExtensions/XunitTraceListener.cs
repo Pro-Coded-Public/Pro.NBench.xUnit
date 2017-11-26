@@ -1,11 +1,7 @@
-﻿using Xunit.Abstractions;
-using System;
-using System.IO;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Xunit.Abstractions;
 
-namespace Pro.NBench.xUnit.XunitExtensions.Pro.NBench.xUnit.XunitExtensions
+namespace Pro.NBench.xUnit.XunitExtensions
 {
     public class XunitTraceListener : TraceListener
     {
