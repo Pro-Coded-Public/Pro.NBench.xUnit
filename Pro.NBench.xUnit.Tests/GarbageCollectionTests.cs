@@ -7,7 +7,7 @@ using System.Linq;
 using NBench;
 
 using Pro.NBench.xUnit.XunitExtensions;
-
+using Pro.NBench.xUnit.XunitExtensions.Pro.NBench.xUnit.XunitExtensions;
 using Xunit.Abstractions;
 
 #endregion
@@ -19,6 +19,16 @@ namespace Pro.NBench.xUnit.Tests
         #region Fields
 
         private readonly List<int[]> _dataCache = new List<int[]>();
+
+        #endregion
+
+        #region Constructors and Destructors
+
+        public GarbageCollectionTests(ITestOutputHelper output)
+        {
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new XunitTraceListener(output));
+        }
 
         #endregion
 

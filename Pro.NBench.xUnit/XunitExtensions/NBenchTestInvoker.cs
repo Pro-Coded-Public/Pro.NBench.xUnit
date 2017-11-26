@@ -76,8 +76,9 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
         private void WriteTestOutput(string output)
         {
-            MessageBus.QueueMessage(new TestOutput(Test, ""));
+           Trace.WriteLine(output);
         }
+        
         private RunSummary RunNBenchTest(object testClassInstance)
         {
             //TODO: It is not strictly reuired to use a RunSummary at the moment - needs more investigation to see

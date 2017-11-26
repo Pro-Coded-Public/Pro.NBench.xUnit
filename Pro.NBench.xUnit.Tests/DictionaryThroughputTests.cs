@@ -6,7 +6,7 @@ using System.Diagnostics;
 using NBench;
 
 using Pro.NBench.xUnit.XunitExtensions;
-
+using Pro.NBench.xUnit.XunitExtensions.Pro.NBench.xUnit.XunitExtensions;
 using Xunit.Abstractions;
 
 #endregion
@@ -31,6 +31,15 @@ namespace Pro.NBench.xUnit.Tests
 
         #endregion
 
+        #region Constructors and Destructors
+
+        public DictionaryThroughputTests(ITestOutputHelper output)
+        {
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new XunitTraceListener(output));
+        }
+
+        #endregion
 
         #region Public Methods and Operators
 
