@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <Version>1.0.3</Version>
@@ -19,11 +18,10 @@ https://github.com/Pro-Coded/Pro.NBench.xUnit</Description>
     <PackageTags>NBench xUnit Resharper</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="NBench" Version="1.0.4" />
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-    <PackageReference Include="XUnit" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
   </ItemGroup>
 </Project>
