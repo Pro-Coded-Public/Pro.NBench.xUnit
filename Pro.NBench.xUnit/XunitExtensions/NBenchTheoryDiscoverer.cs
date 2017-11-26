@@ -8,19 +8,6 @@ using Xunit.Sdk;
 
 namespace Pro.NBench.xUnit.XunitExtensions
 {
-    #region Using Directives
-
-    using System.Diagnostics;
-
-    using Xunit.Abstractions;
-
-    #endregion
-
-    namespace Pro.NBench.xUnit.XunitExtensions
-    {
-    }
-
-    
     /// <summary>
     /// Implementation of <see cref="IXunitTestCaseDiscoverer"/> that supports finding test cases
     /// on methods decorated with <see cref="TheoryAttribute"/>.
