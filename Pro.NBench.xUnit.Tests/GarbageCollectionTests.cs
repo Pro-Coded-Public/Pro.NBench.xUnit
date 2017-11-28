@@ -7,7 +7,6 @@ using System.Linq;
 using NBench;
 
 using Pro.NBench.xUnit.XunitExtensions;
-
 using Xunit.Abstractions;
 
 #endregion

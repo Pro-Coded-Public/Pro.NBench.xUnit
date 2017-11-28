@@ -6,7 +6,6 @@ using System.Diagnostics;
 using NBench;
 
 using Pro.NBench.xUnit.XunitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 

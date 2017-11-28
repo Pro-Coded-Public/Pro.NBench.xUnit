@@ -112,7 +112,7 @@ namespace Pro.NBench.xUnit.NBenchExtensions
             {
                 // If no additional paramaters are required, we create a simple Delegate to the method, that already matches the signature
                 // Action<BenchmarkContext>
-                var simpleDelegate = (Action<BenchmarkContext>)Delegate.CreateDelegate(typeof(Action<BenchmarkContext>), target, invocationMethod);
+                var simpleDelegate = (Action<BenchmarkContext>)invocationMethod.CreateDelegate(typeof(Action<BenchmarkContext>), target);
                 return simpleDelegate;
             }
 
@@ -130,7 +130,7 @@ namespace Pro.NBench.xUnit.NBenchExtensions
             if (invocationMethod.GetParameters().Length == 0)
             {
                 // If no paramaters are required, we create a simple Delegate to the method.
-                var simpleDelegate = (Action)Delegate.CreateDelegate(typeof(Action), target, invocationMethod);
+                var simpleDelegate = (Action)invocationMethod.CreateDelegate(typeof(Action), target);
                 // As we require a knownAction signature, we wrap the simple delegate in one that specifies Action<BenchmarkContext>                
                 Action<BenchmarkContext> wrappedSimpleDelegate = context => simpleDelegate();
                 return wrappedSimpleDelegate;

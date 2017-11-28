@@ -80,7 +80,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
                 //If parameter[i] is a value type perform an unboxing.
                 var parameterType = parameters[i].ParameterType;
-                if (parameterType.IsValueType) { ilGenerator.Emit(OpCodes.Unbox_Any, parameterType); }
+                if (parameterType.GetTypeInfo().IsValueType) { ilGenerator.Emit(OpCodes.Unbox_Any, parameterType); }
 
                 //OR an alternative suggestion is to unbox all..
                 //but this seems to be slower.
@@ -104,7 +104,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
             if (methodInfo.ReturnType != typeof(void))
             {
                 // If result is of value type it needs to be boxed
-                if (methodInfo.ReturnType.IsValueType) { ilGenerator.Emit(OpCodes.Box, methodInfo.ReturnType); }
+                if (methodInfo.ReturnType.GetTypeInfo().IsValueType) { ilGenerator.Emit(OpCodes.Box, methodInfo.ReturnType); }
             }
             else
             { ilGenerator.Emit(OpCodes.Ldnull); }

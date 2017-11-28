@@ -1,10 +1,5 @@
-﻿#region Using Directives
-
-using System.Diagnostics;
-
+﻿using System.Diagnostics;
 using Xunit.Abstractions;
-
-#endregion
 
 namespace Pro.NBench.xUnit.XunitExtensions
 {
