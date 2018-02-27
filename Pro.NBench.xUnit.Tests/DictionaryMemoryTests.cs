@@ -97,7 +97,9 @@ namespace Pro.NBench.xUnit.Tests
             Populate(dictionary, numberOfAdds);
         }
 
+#pragma warning disable xUnit1013 // Public method should be marked as test
         public void Populate(Dictionary<int, int> dictionary, int n)
+#pragma warning restore xUnit1013 // Public method should be marked as test
         {
             for (var i = 0; i < n; i++) { dictionary.Add(i, i); }
         }

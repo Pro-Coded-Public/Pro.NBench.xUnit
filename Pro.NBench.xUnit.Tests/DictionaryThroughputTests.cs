@@ -64,13 +64,17 @@ namespace Pro.NBench.xUnit.Tests
         }
 
         [PerfCleanup]
+#pragma warning disable xUnit1013 // Public method should be marked as test
         public void Cleanup(BenchmarkContext context)
+#pragma warning restore xUnit1013 // Public method should be marked as test
         {
             _dictionary.Clear();
         }
 
         [PerfSetup]
+#pragma warning disable xUnit1013 // Public method should be marked as test
         public void Setup(BenchmarkContext context)
+#pragma warning restore xUnit1013 // Public method should be marked as test
         {
             _addCounter = context.GetCounter(AddCounterName);
             _key = 0;
