@@ -1,6 +1,6 @@
 # Pro.NBench.xUnit
 
-A project to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in ReSharper, and to a less polished extent, in Visual Studio Test Explorer. This allows you to not only test business logic validity, but also set performance criteria as part of your test suite.
+A project to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in [ReSharper](https://www.jetbrains.com/resharper/), and to a less polished extent, in Visual Studio Test Explorer. This allows you to not only test business logic validity, but also set performance criteria as part of your test suite.
 
 ![Visual Studio 2017 Integration](Pro.NBench.XUnit.VS2017.png)
 
