@@ -4,8 +4,6 @@ A project to allow [NBench](https://github.com/petabridge/NBench) tests to be di
 
 ![Visual Studio 2017 Integration](Pro.NBench.XUnit.VS2017.png)
 
-Inspired by Andrea Angella's approach and article for [integrating NBench with NUnit](http://www.andreaangella.com/2016/03/nbench-performance-testing-nunit-resharper-integration/).
-
 Please refer to the [Introduction to NBench](https://petabridge.com/blog/introduction-to-nbench/) as a starting point for information on how to configure NBench Tests and Measurements.
 
 
