@@ -87,6 +87,10 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
             var discovery = new ReflectionDiscovery(new ActionBenchmarkOutput(report => { }, results =>
                 {
+                    if (results.Data.Exceptions.Any())
+                    {
+                        throw new AggregateException(results.Data.Exceptions);
+                    }
 
                     WriteTestOutput("");
 
