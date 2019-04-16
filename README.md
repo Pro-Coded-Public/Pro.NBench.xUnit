@@ -4,6 +4,8 @@ A project to allow [NBench](https://github.com/petabridge/NBench) tests to be di
 
 ![Visual Studio 2017 Integration](https://github.com/Pro-Coded/Pro.NBench.xUnit/blob/master/Pro.NBench.XUnit.VS2017.png)
 
+Jet Brains Rider is also supported.
+
 Please refer to the [Introduction to NBench](https://petabridge.com/blog/introduction-to-nbench/) as a starting point for information on how to configure NBench Tests and Measurements.
 
 
