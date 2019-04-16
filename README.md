@@ -2,7 +2,7 @@
 
 A project to allow [NBench](https://github.com/petabridge/NBench) tests to be discovered, executed, reported, and debugged using [xUnit](https://github.com/xunit/xunit) in [ReSharper](https://www.jetbrains.com/resharper/), and to a less polished extent, in Visual Studio Test Explorer. This allows you to not only test business logic validity, but also set performance criteria as part of your test suite.
 
-![Visual Studio 2017 Integration](Pro.NBench.XUnit.VS2017.png)
+![Visual Studio 2017 Integration](https://github.com/Pro-Coded/Pro.NBench.xUnit/blob/master/Pro.NBench.XUnit.VS2017.png)
 
 Please refer to the [Introduction to NBench](https://petabridge.com/blog/introduction-to-nbench/) as a starting point for information on how to configure NBench Tests and Measurements.
 
@@ -57,7 +57,7 @@ Breakpoints in the NBench benchmarks are fully supported for debugging.
 
 When executed using ReSharper, the Tests are displayed, with the result of NBench Assertions, and any Measurements reported by each Test.
 
-![ResharperResults](ResharperResults2.PNG)
+![ResharperResults](https://github.com/Pro-Coded/Pro.NBench.xUnit/blob/master/ResharperResults2.PNG)
 
 Visual Studio Test Explorer will also execute and debug the Tests, but presentation of results is less polished.
 
