@@ -59,7 +59,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
         {
             var testCase =
                 testMethod.Method.GetParameters().Any()
-                    ? new ExecutionErrorTestCase(_diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod, "[Fact] methods are not allowed to have parameters. Did you mean to use [Theory]?")
+                    ? new ExecutionErrorTestCase(_diagnosticMessageSink, TestMethodDisplay.Method, TestMethodDisplayOptions.None, testMethod, "[Fact] methods are not allowed to have parameters. Did you mean to use [Theory]?")
                     : CreateTestCase(discoveryOptions, testMethod, factAttribute);
 
             return new[] { testCase };

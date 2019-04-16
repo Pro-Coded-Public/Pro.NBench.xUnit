@@ -2,10 +2,9 @@
   <PropertyGroup>
       <IsPackable>true</IsPackable>
     <TargetFramework>netstandard1.6</TargetFramework>
-    <Version>1.0.4</Version>
-    <Authors>Pro-Coded,David Paul McQuiggin</Authors>
+    <Version>1.0.5</Version>
+    <Authors>Pro-Coded, David Paul McQuiggin</Authors>
     <Company>Pro-Coded</Company>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Pro-Coded/Pro.NBench.xUnit/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</PackageProjectUrl>
     <PackageIconUrl>http://i.imgur.com/h9IyPIm.png</PackageIconUrl>
     <Description>Allows NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and Visual Studio Test Explorer.
@@ -13,19 +12,19 @@
 Please refer to the project Url for usage information:
 
 https://github.com/Pro-Coded/Pro.NBench.xUnit</Description>
-    <Copyright>Pro-Coded 2018</Copyright>
+    <Copyright>Pro-Coded 2019</Copyright>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</RepositoryUrl>
     <PackageTags>NBench xUnit Resharper</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NBench" Version="1.0.4" />
+    <PackageReference Include="NBench" Version="1.2.2" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
   </ItemGroup>
 </Project>

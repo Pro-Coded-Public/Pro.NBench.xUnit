@@ -81,7 +81,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
         
         private RunSummary RunNBenchTest(object testClassInstance)
         {
-            //TODO: It is not strictly reuired to use a RunSummary at the moment - needs more investigation to see
+            //TODO: It is not strictly required to use a RunSummary at the moment - needs more investigation to see
             //if we can provide more useful information via the standard xUnit mechanism. For now, what we have is sufficient.
             var summary = new RunSummary();
 

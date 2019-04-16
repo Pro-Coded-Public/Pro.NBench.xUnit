@@ -59,7 +59,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
         /// <param name="theoryAttribute">The theory attribute attached to the test method.</param>
         /// <returns>The test case</returns>
         protected virtual IXunitTestCase CreateTestCaseForTheory(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
-            => new XunitTheoryTestCase(diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod);
+            => new XunitTheoryTestCase(diagnosticMessageSink, TestMethodDisplay.Method, TestMethodDisplayOptions.None, testMethod);
 
         /// <summary>
         /// Creates a test case for a single row of data. By default, returns an instance of <see cref="XunitSkippedDataRowTestCase"/>
@@ -69,7 +69,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
         /// the default behavior will look at the <see cref="TheoryAttribute"/> and the test case will not be skipped.</remarks>
         /// <param name="discoveryOptions">The discovery options to be used.</param>
         /// <param name="testMethod">The test method the test cases belong to.</param>
-        /// <param name="theoryAttribute">The theory attribute attached to the test method.</param>
+        /// <param name="factAttribute">The theory attribute attached to the test method.</param>
         /// <param name="dataRow">The row of data for this test case.</param>
         /// <param name="skipReason">The reason this test case is to be skipped</param>
         /// <returns>The test case</returns>
@@ -88,15 +88,15 @@ namespace Pro.NBench.xUnit.XunitExtensions
         /// </remarks>
         /// <param name="discoveryOptions">The discovery options to be used.</param>
         /// <param name="testMethod">The test method the test cases belong to.</param>
-        /// <param name="theoryAttribute">The theory attribute attached to the test method.</param>
+        /// <param name="factAttribute">The theory attribute attached to the test method.</param>
         /// <returns>Returns zero or more test cases represented by the test method.</returns>
-        public virtual IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
+        public virtual IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
         {
             // Special case Skip, because we want a single Skip (not one per data item); plus, a skipped test may
             // not actually have any data (which is quasi-legal, since it's skipped).
-            var skipReason = theoryAttribute.GetNamedArgument<string>("Skip");
+            var skipReason = factAttribute.GetNamedArgument<string>("Skip");
             if (skipReason != null)
-                return new[] { CreateTestCaseForSkip(discoveryOptions, testMethod, theoryAttribute, skipReason) };
+                return new[] { CreateTestCaseForSkip(discoveryOptions, testMethod, factAttribute, skipReason) };
 
             if (discoveryOptions.PreEnumerateTheoriesOrDefault())
             {
@@ -112,7 +112,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
                         //skipReason = dataAttribute.GetNamedArgument<string>("Skip");
 
                         if (!discoverer.SupportsDiscoveryEnumeration(dataAttribute, testMethod.Method))
-                            return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, theoryAttribute) };
+                            return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, factAttribute) };
 
                         // GetData may return null, but that's okay; we'll let the NullRef happen and then catch it
                         // down below so that we get the composite test case.
@@ -133,17 +133,18 @@ namespace Pro.NBench.xUnit.XunitExtensions
                             //    skipReason != null
                             //        ? CreateTestCaseForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
                             //        : CreateTestCaseForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
-                            var testCase = CreateTestCaseForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
+                            var testCase = CreateTestCaseForDataRow(discoveryOptions, testMethod, factAttribute, dataRow);
 
                             results.Add(testCase);
                         }
                     }
 
                     if (results.Count == 0)
-                        results.Add(new ExecutionErrorTestCase(diagnosticMessageSink,
-                                                               discoveryOptions.MethodDisplayOrDefault(),
-                                                               testMethod,
-                                                               $"No data found for {testMethod.TestClass.Class.Name}.{testMethod.Method.Name}"));
+                        results.Add(new ExecutionErrorTestCase(diagnosticMessageSink, 
+                            TestMethodDisplay.Method,
+                            TestMethodDisplayOptions.None,
+                            testMethod,
+                            $"No data found for {testMethod.TestClass.Class.Name}.{testMethod.Method.Name}"));
 
                     return results;
                 }
@@ -153,7 +154,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
                 }
             }
 
-            return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, theoryAttribute) };
+            return new[] { CreateTestCaseForTheory(discoveryOptions, testMethod, factAttribute) };
         }
     }
 }

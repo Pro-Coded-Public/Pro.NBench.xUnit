@@ -22,8 +22,8 @@ namespace Pro.NBench.xUnit.XunitExtensions
         {
         }
 
-        public NBenchTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, ITestMethod testMethod, object[] testMethodArguments = null)
-            : base(diagnosticMessageSink, testMethodDisplay, testMethod, testMethodArguments)
+        public NBenchTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, ITestMethod testMethod, object[] testMethodArguments = null)        
+           : base(diagnosticMessageSink, testMethodDisplay, TestMethodDisplayOptions.None, testMethod, testMethodArguments)
         {
         }
 

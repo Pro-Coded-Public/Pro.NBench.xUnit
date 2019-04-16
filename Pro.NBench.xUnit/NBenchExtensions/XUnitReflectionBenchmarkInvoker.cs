@@ -14,7 +14,7 @@ using Pro.NBench.xUnit.DynamicMethodDelegates;
 namespace Pro.NBench.xUnit.NBenchExtensions
 {
     /// <summary>
-    ///     <see cref="IBenchmarkInvoker" /> implementaton specific to integration with xUnit, that uses reflection to invoke
+    ///     <see cref="IBenchmarkInvoker" /> implementation specific to integration with xUnit, that uses reflection to invoke
     ///     setup / run / cleanup methods found on classes decorated with the appropriate <see cref="PerfBenchmarkAttribute" />
     ///     s.
     ///     Works with both xUnit Facts, and Theories.
@@ -107,16 +107,16 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         internal static Action<BenchmarkContext> CreateDelegateWithContext(object target, MethodInfo invocationMethod)
         {
-            // As the base method DOES accept a BenchmarkContext as a paramater, we test to see if any other method paramaters are required.
+            // As the base method DOES accept a BenchmarkContext as a parameter, we test to see if any other method parameters are required.
             if (invocationMethod.GetParameters().Length == 1)
             {
-                // If no additional paramaters are required, we create a simple Delegate to the method, that already matches the signature
+                // If no additional parameters are required, we create a simple Delegate to the method, that already matches the signature
                 // Action<BenchmarkContext>
                 var simpleDelegate = (Action<BenchmarkContext>)invocationMethod.CreateDelegate(typeof(Action<BenchmarkContext>), target);
                 return simpleDelegate;
             }
 
-            // If additional paramaters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n paramaters, of any type.
+            // If additional parameters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n parameters, of any type.
             var paramaterisedDelegate = DynamicMethodDelegateFactory.CreateMethodCaller(invocationMethod);
             // As we require a known Action signature, we wrap the delegate in one that specifies Action<BenchmarkContext>  
             Action<BenchmarkContext> wrappedParamaterisedDelegate = context => paramaterisedDelegate(target, _testParamaters);
@@ -125,18 +125,18 @@ namespace Pro.NBench.xUnit.NBenchExtensions
 
         internal static Action<BenchmarkContext> CreateDelegateWithoutContext(object target, MethodInfo invocationMethod)
         {
-            // As the base method does not accept a BenchmarkContext as a paramater, and a known Action delegate signature is 
-            // required for the sake of performance, we test to see if any method paramaters are required.
+            // As the base method does not accept a BenchmarkContext as a parameter, and a known Action delegate signature is 
+            // required for the sake of performance, we test to see if any method parameters are required.
             if (invocationMethod.GetParameters().Length == 0)
             {
-                // If no paramaters are required, we create a simple Delegate to the method.
+                // If no parameters are required, we create a simple Delegate to the method.
                 var simpleDelegate = (Action)invocationMethod.CreateDelegate(typeof(Action), target);
                 // As we require a knownAction signature, we wrap the simple delegate in one that specifies Action<BenchmarkContext>                
                 Action<BenchmarkContext> wrappedSimpleDelegate = context => simpleDelegate();
                 return wrappedSimpleDelegate;
             }
 
-            // If paramaters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n paramaters, of any type.
+            // If parameters are required, we use a DynamicMethod to build a Delegate capable of handling 1-n parameters, of any type.
             var paramaterisedDelegate = DynamicMethodDelegateFactory.CreateMethodCaller(invocationMethod);
             // Again, as we require a known Action signature, we wrap the delegate in one that specifies Action<BenchmarkContext> 
             Action<BenchmarkContext> wrappedParamaterisedDelegate = context => paramaterisedDelegate(target, _testParamaters);

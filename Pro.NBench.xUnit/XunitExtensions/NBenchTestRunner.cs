@@ -68,7 +68,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
 
             testOutputHelper?.Initialize(MessageBus, Test);
 
-            //TODO: Add execution time, if strictly neccessary - the NBench values are certainly more accurate.
+            //TODO: Add execution time, if strictly necessary - the NBench values are certainly more accurate.
             var executionTime = await InvokeTestMethodAsync(aggregator);
 
             if (testOutputHelper != null)

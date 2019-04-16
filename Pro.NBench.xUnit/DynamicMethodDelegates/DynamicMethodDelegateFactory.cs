@@ -33,7 +33,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
             #region Argument count check
 
-            // Define a label for succesfull argument count checking.
+            // Define a label for successful argument count checking.
             var argsOk = ilGenerator.DefineLabel();
 
             // Check input argument count.

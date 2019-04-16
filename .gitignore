@@ -246,3 +246,4 @@ ModelManifest.xml
 
 # JetBrains Rider IDE 
 .idea/
+/Pro.NBench.xUnit.Tests/Properties/PublishProfiles
