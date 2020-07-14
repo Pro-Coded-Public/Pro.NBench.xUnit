@@ -7,13 +7,22 @@ using NBench;
 
 using Pro.NBench.xUnit.XunitExtensions;
 using Xunit.Abstractions;
-
 #endregion
 
 namespace Pro.NBench.xUnit.Tests
 {
     public class DictionaryThroughputTests
     {
+        #region Constructors and Destructors
+
+        public DictionaryThroughputTests(ITestOutputHelper output)
+        {
+            Trace.Listeners.Clear();
+            Trace.Listeners.Add(new XunitTraceListener(output));
+        }
+
+            #endregion
+
         #region Constants
 
         private const int AcceptableMinAddThroughput = 20000000;
@@ -27,17 +36,6 @@ namespace Pro.NBench.xUnit.Tests
         private readonly Dictionary<int, int> _dictionary = new Dictionary<int, int>();
         private Counter _addCounter;
         private int _key;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        public DictionaryThroughputTests(ITestOutputHelper output)
-        {
-            Trace.Listeners.Clear();
-            Trace.Listeners.Add(new XunitTraceListener(output));
-        }
-
         #endregion
 
         #region Public Methods and Operators
@@ -47,7 +45,7 @@ namespace Pro.NBench.xUnit.Tests
         [CounterThroughputAssertion(AddCounterName, MustBe.GreaterThan, AcceptableMinAddThroughput)]
         public void AddThroughput_IterationsMode()
         {
-            for (var i = 0; i < AcceptableMinAddThroughput; i++)
+            for(var i = 0; i < AcceptableMinAddThroughput; i++)
             {
                 _dictionary.Add(i, i);
                 _addCounter.Increment();
@@ -79,7 +77,6 @@ namespace Pro.NBench.xUnit.Tests
             _addCounter = context.GetCounter(AddCounterName);
             _key = 0;
         }
-
         #endregion
     }
 }

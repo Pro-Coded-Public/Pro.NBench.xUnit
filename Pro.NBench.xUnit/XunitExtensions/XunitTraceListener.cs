@@ -18,7 +18,7 @@ namespace Pro.NBench.xUnit.XunitExtensions
             _output = output;
         }
 
-        #endregion
+            #endregion
 
         #region Public Methods and Operators
 
@@ -31,7 +31,6 @@ namespace Pro.NBench.xUnit.XunitExtensions
         {
             _output.WriteLine(message);
         }
-
         #endregion
     }
 }

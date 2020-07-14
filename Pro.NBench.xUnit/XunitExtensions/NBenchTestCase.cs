@@ -7,13 +7,34 @@ using System.Threading.Tasks;
 
 using Xunit.Abstractions;
 using Xunit.Sdk;
-
 #endregion
 
 namespace Pro.NBench.xUnit.XunitExtensions
 {
     public class NBenchTestCase : XunitTestCase
     {
+        #region Public Methods and Operators
+
+        public override async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
+                                                        IMessageBus messageBus,
+                                                        object[] constructorArguments,
+                                                        ExceptionAggregator aggregator,
+                                                        CancellationTokenSource cancellationTokenSource)
+        {
+            return
+                await
+                new NBenchTestCaseRunner(this,
+                                         DisplayName,
+                                         SkipReason,
+                                         constructorArguments,
+                                         TestMethodArguments,
+                                         messageBus,
+                                         aggregator,
+                                         cancellationTokenSource).RunAsync();
+        }
+
+            #endregion
+
         #region Constructors and Destructors
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -22,24 +43,16 @@ namespace Pro.NBench.xUnit.XunitExtensions
         {
         }
 
-        public NBenchTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay testMethodDisplay, ITestMethod testMethod, object[] testMethodArguments = null)        
-           : base(diagnosticMessageSink, testMethodDisplay, TestMethodDisplayOptions.None, testMethod, testMethodArguments)
+        public NBenchTestCase(IMessageSink diagnosticMessageSink,
+                              TestMethodDisplay testMethodDisplay,
+                              ITestMethod testMethod,
+                              object[] testMethodArguments = null) : base(diagnosticMessageSink,
+                                                                          testMethodDisplay,
+                                                                          TestMethodDisplayOptions.None,
+                                                                          testMethod,
+                                                                          testMethodArguments)
         {
         }
-
-        #endregion
-
-        #region Public Methods and Operators
-
-        public override async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink, IMessageBus messageBus, object[] constructorArguments,
-                                                        ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource)
-        {
-            return
-                await
-                new NBenchTestCaseRunner(this, DisplayName, SkipReason, constructorArguments, TestMethodArguments, messageBus, aggregator,
-                    cancellationTokenSource).RunAsync();
-        }
-
         #endregion
     }
 }

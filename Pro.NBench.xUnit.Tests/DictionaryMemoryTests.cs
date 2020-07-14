@@ -8,7 +8,6 @@ using NBench;
 using Pro.NBench.xUnit.XunitExtensions;
 using Xunit;
 using Xunit.Abstractions;
-
 #endregion
 
 //Important - disable test parallelization at assembly or collection level
@@ -18,14 +17,6 @@ namespace Pro.NBench.xUnit.Tests
 {
     public class DictionaryMemoryTests
     {
-        #region Constants
-
-        private const int DictionaryEntrySize = 24;
-        private const int MaxExpectedMemory = NumberOfAdds * DictionaryEntrySize;
-        private const int NumberOfAdds = 1000000;
-
-        #endregion
-
         #region Constructors and Destructors
 
         public DictionaryMemoryTests(ITestOutputHelper output)
@@ -34,6 +25,13 @@ namespace Pro.NBench.xUnit.Tests
             Trace.Listeners.Add(new XunitTraceListener(output));
         }
 
+            #endregion
+
+        #region Constants
+
+        private const int DictionaryEntrySize = 24;
+        private const int MaxExpectedMemory = NumberOfAdds * DictionaryEntrySize;
+        private const int NumberOfAdds = 1000000;
         #endregion
 
         #region Public Methods and Operators
@@ -58,7 +56,6 @@ namespace Pro.NBench.xUnit.Tests
             Populate(dictionary, NumberOfAdds);
         }
 
-
         [PerfBenchmark(Description = "AddMemoryMeasurement_Theory", RunMode = RunMode.Iterations, TestMode = TestMode.Measurement)]
         [MemoryMeasurement(MemoryMetric.TotalBytesAllocated)]
         [NBenchTheory]
@@ -73,7 +70,7 @@ namespace Pro.NBench.xUnit.Tests
             Populate(dictionary, numberOfAdds);
         }
 
-        [PerfBenchmark(Description = "AddMemory_PassingTest", RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
+        [PerfBenchmark(Description = nameof(AddMemory_PassingTest), RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [MemoryAssertion(MemoryMetric.TotalBytesAllocated, MustBe.LessThan, MaxExpectedMemory * 2)]
         [NBenchFact]
         public void AddMemory_PassingTest()
@@ -83,7 +80,7 @@ namespace Pro.NBench.xUnit.Tests
             Populate(dictionary, NumberOfAdds);
         }
 
-        [PerfBenchmark(Description = "AddMemory_PassingTest", RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
+        [PerfBenchmark(Description = nameof(AddMemory_PassingTest), RunMode = RunMode.Iterations, TestMode = TestMode.Test)]
         [MemoryAssertion(MemoryMetric.TotalBytesAllocated, MustBe.LessThan, MaxExpectedMemory * 2)]
         [NBenchTheory]
         [InlineData(1000, "One Thousand")]
@@ -101,9 +98,8 @@ namespace Pro.NBench.xUnit.Tests
         public void Populate(Dictionary<int, int> dictionary, int n)
 #pragma warning restore xUnit1013 // Public method should be marked as test
         {
-            for (var i = 0; i < n; i++) { dictionary.Add(i, i); }
+            for(var i = 0; i < n; i++) { dictionary.Add(i, i); }
         }
-
         #endregion
     }
 }

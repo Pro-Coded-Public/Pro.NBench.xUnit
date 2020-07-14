@@ -3,7 +3,6 @@
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-
 #endregion
 
 namespace Pro.NBench.xUnit.XunitExtensions
@@ -18,6 +17,12 @@ namespace Pro.NBench.xUnit.XunitExtensions
             DisplayName = displayName;
         }
 
+            #endregion
+
+        #region Explicit Interface Properties
+
+        ITestCase ITest.TestCase => TestCase;
+
         #endregion
 
         #region Public Properties
@@ -25,19 +30,6 @@ namespace Pro.NBench.xUnit.XunitExtensions
         public string DisplayName { get; }
 
         public IXunitTestCase TestCase { get; }
-
-        #endregion
-
-        #region Explicit Interface Properties
-
-        ITestCase ITest.TestCase
-        {
-            get
-            {
-                return TestCase;
-            }
-        }
-
         #endregion
     }
 }

@@ -3,7 +3,6 @@
 using System;
 using System.Reflection;
 using System.Reflection.Emit;
-
 #endregion
 
 namespace Pro.NBench.xUnit.DynamicMethodDelegates
@@ -13,7 +12,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
         #region Public Methods and Operators
 
         /// <summary>
-        ///     Generates a DynamicMethodDelegate delegate from a MethodInfo object.
+        /// Generates a DynamicMethodDelegate delegate from a MethodInfo object.
         /// </summary>
         public static DynamicMethodDelegate CreateMethodCaller(MethodInfo methodInfo)
         {
@@ -26,7 +25,10 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
             // inject code.
 
             //DMCQ: this could be typed using Action<,,,> or Func<,,,> with MakeGeneric method
-            var dynamicMethod = new DynamicMethod("", typeof(object), argTypes, typeof(DynamicMethodDelegateFactory));
+            var dynamicMethod = new DynamicMethod(string.Empty,
+                                                  typeof(object),
+                                                  argTypes,
+                                                  typeof(DynamicMethodDelegateFactory));
             var ilGenerator = dynamicMethod.GetILGenerator();
 
             #region IL generation
@@ -55,8 +57,9 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
             // If method isn't static push target instance on top
             // of stack.
-            if (!methodInfo.IsStatic)
+            if(!methodInfo.IsStatic)
             {
+
                 // Argument 0 of dynamic method is target instance.
                 ilGenerator.Emit(OpCodes.Ldarg_0);
             }
@@ -67,7 +70,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
             // Lay out args array onto stack.
             var i = 0;
-            while (i < paramaterLength)
+            while(i < paramaterLength)
             {
                 // Push args array reference onto the stack, followed
                 // by the current argument index (i). The Ldelem_Ref opcode
@@ -80,7 +83,7 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
                 //If parameter[i] is a value type perform an unboxing.
                 var parameterType = parameters[i].ParameterType;
-                if (parameterType.GetTypeInfo().IsValueType) { ilGenerator.Emit(OpCodes.Unbox_Any, parameterType); }
+                if(parameterType.GetTypeInfo().IsValueType) { ilGenerator.Emit(OpCodes.Unbox_Any, parameterType); }
 
                 //OR an alternative suggestion is to unbox all..
                 //but this seems to be slower.
@@ -101,13 +104,16 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
             // otherwise a normal call will be emitted.
             ilGenerator.Emit(methodInfo.IsVirtual ? OpCodes.Callvirt : OpCodes.Call, methodInfo);
 
-            if (methodInfo.ReturnType != typeof(void))
+            if(methodInfo.ReturnType != typeof(void))
             {
+
                 // If result is of value type it needs to be boxed
-                if (methodInfo.ReturnType.GetTypeInfo().IsValueType) { ilGenerator.Emit(OpCodes.Box, methodInfo.ReturnType); }
-            }
-            else
-            { ilGenerator.Emit(OpCodes.Ldnull); }
+                if(methodInfo.ReturnType.GetTypeInfo().IsValueType)
+                {
+                    ilGenerator.Emit(OpCodes.Box, methodInfo.ReturnType); }
+            } else
+            {
+                ilGenerator.Emit(OpCodes.Ldnull); }
 
             // Emit return opcode.
             ilGenerator.Emit(OpCodes.Ret);
@@ -118,7 +124,6 @@ namespace Pro.NBench.xUnit.DynamicMethodDelegates
 
             return (DynamicMethodDelegate)dynamicMethod.CreateDelegate(typeof(DynamicMethodDelegate));
         }
-
         #endregion
     }
 }
