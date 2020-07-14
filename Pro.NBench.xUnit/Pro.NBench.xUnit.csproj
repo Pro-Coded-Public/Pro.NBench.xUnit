@@ -1,30 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-      <IsPackable>true</IsPackable>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
-    <Authors>Pro-Coded, David Paul McQuiggin</Authors>
-    <Company>Pro-Coded</Company>
-    <PackageProjectUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</PackageProjectUrl>
-    <PackageIconUrl>http://i.imgur.com/h9IyPIm.png</PackageIconUrl>
-    <Description>Allows NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and Visual Studio Test Explorer.
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Version>2.0.0</Version>
+		<Authors>Pro-Coded, David Paul McQuiggin</Authors>
+		<Company>Pro-Coded</Company>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</PackageProjectUrl>
+		<PackageIconUrl>http://i.imgur.com/h9IyPIm.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<Description>
+			Allows NBench tests to be discovered, executed, reported, and debugged using xUnit in ReSharper, and Visual Studio Test Explorer.
 
-Please refer to the project Url for usage information:
+			Please refer to the project Url for usage information:
 
-https://github.com/Pro-Coded/Pro.NBench.xUnit</Description>
-    <Copyright>Pro-Coded 2020</Copyright>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</RepositoryUrl>
-    <PackageTags>NBench xUnit Resharper</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="NBench" Version="2.0.1" />
-    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-  </ItemGroup>
+			https://github.com/Pro-Coded/Pro.NBench.xUnit
+		</Description>
+		<Copyright>Pro-Coded 2020</Copyright>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/Pro-Coded/Pro.NBench.xUnit</RepositoryUrl>
+		<PackageTags>NBench xUnit Resharper</PackageTags>		
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="NBench" Version="2.0.1" />
+		<PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
+		<PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+		<PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
 </Project>
